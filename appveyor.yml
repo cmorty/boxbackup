@@ -1,5 +1,11 @@
 version: 1.0.{build}
 os: Visual Studio 2015
+# No need to get the whole history
+clone_depth: 1
+
+before_build:
+- cmd: infrastructure/msvc/win32.bat
+
 
 build:
   project: ./infrastructure/msvc/2010/boxbackup.sln
