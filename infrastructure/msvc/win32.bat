@@ -3,6 +3,7 @@
 echo quick and dirty to get up and running by generating the required files 
 echo using Cygwin and Perl
 
+cd %~dp0
 cd ..\..
 
 copy .\infrastructure\BoxPlatform.pm.in .\infrastructure\BoxPlatform.pm

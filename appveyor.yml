@@ -3,8 +3,21 @@ os: Visual Studio 2015
 # No need to get the whole history
 clone_depth: 1
 
+install:
+  # Get zlib
+  - appveyor DownloadFile "http://zlib.net/zlib128-dll.zip"
+  - mkdir ..\zlib
+  - 7z -y x zlib128-dll.zip -o..\zlib * -r
+
+  # Install Openssl
+  - appveyor DownloadFile "http://slproweb.com/download/Win32OpenSSL-1_0_2d.exe"
+  - ps: Start-Process "Win32OpenSSL-1_0_2d.exe" -ArgumentList "/silent /verysilent /sp- /suppressmsgboxes" -Wait
+
+  # Install pcre
+  - nuget install pcre -Verbosity detailed -Version 8.33.0.1 -OutputDirectory ..\pcre
+
 before_build:
-- cmd: infrastructure/msvc/win32.bat
+  - cmd: infrastructure/msvc/win32.bat
 
 
 build:
