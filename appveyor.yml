@@ -23,7 +23,7 @@ install:
   - 7z -y x openssl-1.0.2d.tar 
   - mv openssl-1.0.2d openssl
   - ps: cd openssl
-  - perl Configure debug-VC-WIN32 no-asm --prefix=<base-directory>\openssl
+  - perl Configure debug-VC-WIN32 no-asm --prefix=%CD%
   - ms\do_ms
   - nmake -f ms\nt.mak
   - nmake -f ms\nt.mak install
