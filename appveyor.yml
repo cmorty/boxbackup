@@ -5,7 +5,9 @@ clone_depth: 1
 
 install:
   # Mode up one directory
+  - echo %CD%
   - ps: cd ..
+  - echo %CD%
 
   # Get zlib
   - appveyor DownloadFile "http://zlib.net/zlib128-dll.zip"
@@ -16,7 +18,7 @@ install:
   - nuget install pcre -Verbosity detailed -Version 8.33.0.1 -OutputDirectory ..\pcre
 
   # Build Openssl
-  - appveyor DownloadFile "https://www.openssl.org/source/openssl-1.0.2d.tar.gz"
+  - appveyor DownloadFile "http://www.openssl.org/source/openssl-1.0.2d.tar.gz"
   - mkdir openssl
   - 7z -y x openssl-1.0.2d.tar.gz
   - 7z -y x openssl-1.0.2d.tar -oopenssl * -r
