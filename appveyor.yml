@@ -7,7 +7,7 @@ clone_depth: 1
 
 install:
 
-  - '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd"'
+  - '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x86'
   # Mode up one directory
   - echo %CD%
   - cmd: cd ..
