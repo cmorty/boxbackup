@@ -102,9 +102,9 @@ BEGIN
 		}
 		elsif(-d '.git')
 		{
-			$svnversion = `git svn info | grep '^Revision:' | cut -d' ' -f2`;
+			$svnversion = `git describe --tags --always`;
 			chomp $svnversion;
-			$svnurl = `git svn info --url`;
+			$svnurl = "git";
 		}
 
 		my $svndir;
