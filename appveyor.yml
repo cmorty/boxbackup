@@ -10,8 +10,11 @@ install:
   - 7z -y x zlib128-dll.zip -o..\zlib * -r
 
   # Install Openssl
-  - appveyor DownloadFile "http://slproweb.com/download/Win32OpenSSL-1_0_2d.exe"
-  - ps: Start-Process "Win32OpenSSL-1_0_2d.exe" -ArgumentList "/silent /verysilent /sp- /suppressmsgboxes" -Wait
+  #- appveyor DownloadFile "https://indy.fulgan.com/SSL/openssl-1.0.2d-i386-win32.zip"
+  #- mkdir ..\zlib
+  #- 7z -y x zlib128-dll.zip -o..\zlib * -r
+  - nuget install openssl -Verbosity detailed -Version 1.0.2.1 -OutputDirectory ..\openssl
+
 
   # Install pcre
   - nuget install pcre -Verbosity detailed -Version 8.33.0.1 -OutputDirectory ..\pcre
