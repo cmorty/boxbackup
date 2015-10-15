@@ -32,6 +32,9 @@ install:
   - nmake -f ms\nt.mak
   - nmake -f ms\nt.mak install
 
+  # Clean up WD
+  - ps: cd %APPVEYOR_BUILD_FOLDER%
+  - echo %CD%
 
 before_build:
   - cmd: infrastructure/msvc/win32.bat
