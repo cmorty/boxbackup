@@ -10,10 +10,10 @@ install:
   - 7z -y x zlib128-dll.zip -o..\zlib * -r
 
   # Install Openssl
-  #- appveyor DownloadFile "https://indy.fulgan.com/SSL/openssl-1.0.2d-i386-win32.zip"
-  #- mkdir ..\zlib
-  #- 7z -y x zlib128-dll.zip -o..\zlib * -r
-  - nuget install openssl -Verbosity detailed -Version 1.0.2.1 -OutputDirectory ..\openssl
+  - appveyor DownloadFile "https://indy.fulgan.com/SSL/openssl-1.0.2d-i386-win32.zip"
+  - mkdir ..\openssl
+  - 7z -y x openssl-1.0.2d-i386-win32.zip -o..\openssl * -r
+
 
 
   # Install pcre
