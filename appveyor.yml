@@ -10,7 +10,7 @@ install:
   - '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd"'
   # Mode up one directory
   - echo %CD%
-  - ps: cd ..
+  - cmd: cd ..
   - echo %CD%
 
   # Get zlib
@@ -26,14 +26,14 @@ install:
   - 7z -y x openssl-1.0.2d.tar.gz
   - 7z -y x openssl-1.0.2d.tar 
   - mv openssl-1.0.2d openssl
-  - ps: cd openssl
+  - cmd: cd openssl
   - perl Configure debug-VC-WIN32 no-asm --prefix=%CD%
   - ms\do_ms
   - nmake -f ms\nt.mak
   - nmake -f ms\nt.mak install
 
   # Clean up WD
-  - ps: cd %APPVEYOR_BUILD_FOLDER%
+  - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - echo %CD%
 
 before_build:
