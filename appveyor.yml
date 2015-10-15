@@ -4,20 +4,28 @@ os: Visual Studio 2015
 clone_depth: 1
 
 install:
+  # Mode up one directory
+  - ps: cd ..
+
   # Get zlib
   - appveyor DownloadFile "http://zlib.net/zlib128-dll.zip"
-  - mkdir ..\zlib
-  - 7z -y x zlib128-dll.zip -o..\zlib * -r
-
-  # Install Openssl
-  - appveyor DownloadFile "https://indy.fulgan.com/SSL/openssl-1.0.2d-i386-win32.zip"
-  - mkdir ..\openssl
-  - 7z -y x openssl-1.0.2d-i386-win32.zip -o..\openssl * -r
-
-
+  - mkdir zlib
+  - 7z -y x zlib128-dll.zip -ozlib * -r
 
   # Install pcre
   - nuget install pcre -Verbosity detailed -Version 8.33.0.1 -OutputDirectory ..\pcre
+
+  # Build Openssl
+  - appveyor DownloadFile "https://www.openssl.org/source/openssl-1.0.2d.tar.gz"
+  - mkdir openssl
+  - 7z -y x openssl-1.0.2d.tar.gz
+  - 7z -y x openssl-1.0.2d.tar -oopenssl * -r
+  - ps: cd openssl-1.0.2d
+  - perl Configure debug-VC-WIN32 no-asm --prefix=<base-directory>\openssl
+  - ms\do_ms
+  - nmake -f ms\nt.mak
+  - nmake -f ms\nt.mak install
+
 
 before_build:
   - cmd: infrastructure/msvc/win32.bat
