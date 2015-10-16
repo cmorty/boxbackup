@@ -1,5 +1,5 @@
 version: 1.0.{build}
-os: Visual Studio 2015
+os: MinGW
 # No need to get the whole history
 clone_depth: 1
 
@@ -7,30 +7,33 @@ clone_depth: 1
 
 install:
 
-  - '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x86'
   # Mode up one directory
   - echo %CD%
   - cmd: cd ..
   - echo %CD%
 
-  # Get zlib
-  - appveyor DownloadFile "http://zlib.net/zlib128-dll.zip"
-  - mkdir zlib
-  - 7z -y x zlib128-dll.zip -ozlib * -r
-
-  # Install pcre
-  - nuget install pcre -Verbosity detailed -Version 8.33.0.1 -OutputDirectory ..\pcre
 
   # Build Openssl
   - appveyor DownloadFile "http://www.openssl.org/source/openssl-1.0.2d.tar.gz"
-  - 7z -y x openssl-1.0.2d.tar.gz
-  - 7z -y x openssl-1.0.2d.tar > 7zOssl.log
+  - tar xf openssl-1.0.2d.tar.gz
   - mv openssl-1.0.2d openssl
+
   - cmd: cd openssl
-  - perl Configure debug-VC-WIN32 no-asm --prefix=%CD%
-  - ms\do_ms
-  - nmake -f ms\nt.mak
-  - nmake -f ms\nt.mak install
+  - Configure --prefix=/usr/i686-pc-mingw32/ mingw
+  - make
+  - make install_sw
+  - cmd: cd ..
+
+  # PCRE
+  - appveyor DownloadFile "http://prdownloads.sourceforge.net/pcre/pcre-8.12.tar.bz2?download"
+  - tar xf pcre-8.12.tar.bz2
+  - mv pcre-8.12 pcre
+  - cmd: cd pcre
+  - export CFLAGS="-mno-cygwin"
+  - export CXXFLAGS="-mno-cygwin"
+  - ./configure --prefix=/usr/i686-pc-mingw32 --disable-shared
+  - make 
+  - make install
 
   # Clean up WD
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
