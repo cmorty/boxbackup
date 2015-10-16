@@ -31,8 +31,8 @@ install:
   - tar xf pcre-8.12.tar.bz2
   - mv pcre-8.12 pcre
   - cmd: cd pcre
-  - export CFLAGS="-mno-cygwin"
-  - export CXXFLAGS="-mno-cygwin"
+  - set CFLAGS="-mno-cygwin"
+  - set CXXFLAGS="-mno-cygwin"
   - ./configure --prefix=/usr/i686-pc-mingw32 --disable-shared
   - make 
   - make install
