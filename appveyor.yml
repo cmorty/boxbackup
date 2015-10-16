@@ -6,8 +6,10 @@ clone_depth: 1
 
 install:
 
-  # Mode up one directory
+
+  - set PATH=C:\MinGW\msys\1.0\bin;C:\MinGW\bin;%PATH%
   - echo %PATH%
+  # Move up one directory
   - echo %CD%
   - cmd: cd ..
   - echo %CD%
