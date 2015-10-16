@@ -24,7 +24,7 @@ install:
   # Build Openssl
   - appveyor DownloadFile "http://www.openssl.org/source/openssl-1.0.2d.tar.gz"
   - 7z -y x openssl-1.0.2d.tar.gz
-  - 7z -y x openssl-1.0.2d.tar 
+  - 7z -y x openssl-1.0.2d.tar > 7zOssl.log
   - mv openssl-1.0.2d openssl
   - cmd: cd openssl
   - perl Configure debug-VC-WIN32 no-asm --prefix=%CD%
