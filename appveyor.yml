@@ -33,7 +33,7 @@ install:
   - cmd: cd pcre
   - set CFLAGS="-mno-cygwin"
   - set CXXFLAGS="-mno-cygwin"
-  - ./configure --prefix=/usr/i686-pc-mingw32 --disable-shared
+  - sh ./configure --prefix=/usr/i686-pc-mingw32 --disable-shared
   - make 
   - make install
 
