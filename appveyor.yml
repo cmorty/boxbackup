@@ -1,5 +1,4 @@
 version: 1.0.{build}
-os: MinGW
 # No need to get the whole history
 clone_depth: 1
 
@@ -8,6 +7,7 @@ clone_depth: 1
 install:
 
   # Mode up one directory
+  - echo %PATH%
   - echo %CD%
   - cmd: cd ..
   - echo %CD%
@@ -19,7 +19,7 @@ install:
   - mv openssl-1.0.2d openssl
 
   - cmd: cd openssl
-  - Configure --prefix=/usr/i686-pc-mingw32/ mingw
+  - perl Configure --prefix=/usr/i686-pc-mingw32/ mingw
   - make
   - make install_sw
   - cmd: cd ..
