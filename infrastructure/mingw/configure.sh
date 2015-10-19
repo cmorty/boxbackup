@@ -22,6 +22,7 @@ if [ ! -r "$DEP_PATH/lib/libz.dll.a" ]; then
 	exit 2
 fi
 
+echo "Running bootstrap"
 if [ ! -x "configure" ]; then
 	if ! ./bootstrap; then
 		echo "Error: bootstrap failed, aborting." >&2
@@ -29,9 +30,10 @@ if [ ! -x "configure" ]; then
 	fi
 fi
 
+echo "Running configure"
 if ! ./configure "$@" --host=$target \
-	CFLAGS="-mthreads" \
-	CXXFLAGS="-mthreads" \
+	CFLAGS="-mthreads -I${DEP_PATH}/include" \
+	CXXFLAGS="-mthreads -I${DEP_PATH}/include" \
 	LDFLAGS="-Wl,-Bstatic -mthreads -L${DEP_PATH}/lib"
 then
 	echo "Error: configure failed, aborting." >&2
