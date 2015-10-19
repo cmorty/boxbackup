@@ -28,7 +28,7 @@ install:
   - mv openssl-1.0.2d openssl
 
   - cmd: cd openssl
-  - perl Configure mingw zlib --with-zlib-include=/usr/local/include --with-zlib-lib=/usr/local/lib -DOPENSSL_NO_CAPIENG > openssl-configure.log
+  - perl Configure mingw zlib  --prefix=/usr/i686-pc-mingw32/ mingw > openssl-configure.log
   - make > openssl-make.log
   - make install_sw 
 
