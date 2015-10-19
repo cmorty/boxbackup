@@ -40,7 +40,7 @@ install:
   - mv pcre-8.12 pcre
 
   - cmd: cd pcre
-  - sh -c './configure > pcre-configure.log || (cat config.log; false)'  
+  - sh -c './configure || cat config.log' > pcre-configure.log 
   - make  > pcre-make.log
   - make install
 
