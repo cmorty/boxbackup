@@ -17,7 +17,7 @@ if test "x$GXX" = "xyes"; then
   # Don't check for gcc -rdynamic on Solaris as it's broken, but returns 0.
   # On Cygwin it does nothing except cause gcc to emit a warning message.
   case $build_os in
-  solaris*|cygwin)
+  solaris*|cygwin|mingw*)
     AC_MSG_NOTICE([skipping check for -rdynamic on $build_os])
     ;;
   *)
