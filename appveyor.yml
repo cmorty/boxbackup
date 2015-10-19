@@ -17,13 +17,12 @@ install:
   - mv zlib-1.2.8 zlib
 
   - cmd: cd zlib
-  - make -f win32/Makefile.gcc
+  - make -f win32/Makefile.gcc > zlib-make.log
   - make -f win32/Makefile.gcc install INCLUDE_PATH=/usr/local/include BINARY_PATH=/usr/local/bin LIBRARY_PATH=/usr/local/lib
 
 
   # Openssl
   - cmd: cd %APPVEYOR_BUILD_FOLDER%/..
-  - echo %PATH%
   - appveyor DownloadFile "http://www.openssl.org/source/openssl-1.0.2d.tar.gz"
   - tar xf openssl-1.0.2d.tar.gz
   - mv openssl-1.0.2d openssl
@@ -36,7 +35,6 @@ install:
 
   # PCRE
   - cmd: cd %APPVEYOR_BUILD_FOLDER%/..
-  - echo %PATH%
   - appveyor DownloadFile "http://prdownloads.sourceforge.net/pcre/pcre-8.12.tar.bz2?download"
   - tar xf pcre-8.12.tar.bz2
   - mv pcre-8.12 pcre
@@ -53,5 +51,5 @@ install:
 
 
 build_script:
-  - sh ./configure --with-ssl-headers=/usr/local/ssl/include --with-ssl-lib=/usr/local/ssl/lib CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib LIBS="-lwsock32 -lgdi32"
+  - sh infrastructure/mingw/configure.sh
   - sh make
