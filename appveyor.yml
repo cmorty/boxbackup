@@ -24,9 +24,9 @@ install:
   - mv openssl-1.0.2d openssl
 
   - cmd: cd openssl
-  - perl Configure --prefix=/usr/i686-pc-mingw32/ mingw
-  - make > nul
-  - make install_sw
+  - perl Configure --prefix=/usr/i686-pc-mingw32/ mingw > openssl-configure.log
+  - make > openssl-make.log
+  - make install_sw 
 
 
   # PCRE
@@ -37,8 +37,8 @@ install:
   - mv pcre-8.12 pcre
   - cmd: cd pcre
 
-  - sh -c './configure --prefix=/usr/i686-pc-mingw32 --disable-shared || cat config.log' 
-  - make 
+  - sh -c './configure --prefix=/usr/i686-pc-mingw32 --disable-shared || cat config.log'  > pcre-configure.log
+  - make  > pcre-make.log
   - make install
 
 
