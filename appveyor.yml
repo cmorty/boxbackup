@@ -55,4 +55,4 @@ install:
 
 build_script:
   - sh infrastructure/mingw/configure.sh
-  - sh make
+  - make
