@@ -9,6 +9,9 @@ install:
   - set PATH=C:\MinGW\msys\1.0\bin;C:\MinGW\bin;%PATH%
   - echo %PATH%
 
+  # mingw
+  - mingw-get update
+  - mingw-get install msys-perl msys-m4 msys-autoconf msys-automake
 
   # zlib
   - cmd: cd %APPVEYOR_BUILD_FOLDER%/..
