@@ -2,7 +2,7 @@ version: 1.0.{build}
 # No need to get the whole history
 clone_depth: 1
 
-# https://github.com/cppformat/cppformat/blob/master/support/appveyor-build.py
+# https://www.boxbackup.org/wiki/CompileWithMinGW
 
 install:
 
@@ -12,16 +12,16 @@ install:
 
   # zlib
   - cmd: cd %APPVEYOR_BUILD_FOLDER%/..
-  - appveyor DownloadFile  "http://zlib.net/zlib-1.2.5.tar.gz"
-  - tar xf zlib-1.2.5.tar.gz
-  - mv zlib-1.2.5 zlib
+  - appveyor DownloadFile  "http://zlib.net/zlib-1.2.8.tar.gz"
+  - tar xf zlib-1.2.8.tar.gz
+  - mv zlib-1.2.8 zlib
 
   - cmd: cd zlib
   - make -f win32/Makefile.gcc
   - make -f win32/Makefile.gcc install INCLUDE_PATH=/usr/local/include BINARY_PATH=/usr/local/bin LIBRARY_PATH=/usr/local/lib
 
 
-  # Build Openssl
+  # Openssl
   - cmd: cd %APPVEYOR_BUILD_FOLDER%/..
   - echo %PATH%
   - appveyor DownloadFile "http://www.openssl.org/source/openssl-1.0.2d.tar.gz"
@@ -29,7 +29,7 @@ install:
   - mv openssl-1.0.2d openssl
 
   - cmd: cd openssl
-  - perl Configure --prefix=/usr/i686-pc-mingw32/ mingw > openssl-configure.log
+  - perl Configure mingw zlib --with-zlib-include=/usr/local/include --with-zlib-lib=/usr/local/lib -DOPENSSL_NO_CAPIENG > openssl-configure.log
   - make > openssl-make.log
   - make install_sw 
 
@@ -42,7 +42,7 @@ install:
   - mv pcre-8.12 pcre
 
   - cmd: cd pcre
-  - sh -c './configure --prefix=/usr/i686-pc-mingw32 --disable-shared || cat config.log'  > pcre-configure.log
+  - sh -c './configure || cat config.log'  > pcre-configure.log
   - make  > pcre-make.log
   - make install
 
@@ -53,5 +53,5 @@ install:
 
 
 build_script:
-  - sh infrastructure/mingw/configure.sh
+  - sh ./configure --with-ssl-headers=/usr/local/ssl/include --with-ssl-lib=/usr/local/ssl/lib CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib LIBS="-lwsock32 -lgdi32"
   - sh make
