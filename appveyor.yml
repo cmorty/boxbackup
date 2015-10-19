@@ -28,7 +28,7 @@ install:
   - mv openssl-1.0.2d openssl
 
   - cmd: cd openssl
-  - perl Configure mingw zlib  --prefix=/usr/i686-pc-mingw32/ mingw > openssl-configure.log
+  - sh 'perl Configure --prefix=/usr/i686-pc-mingw32/ mingw > openssl-configure.log || (cat openssl-configure.log; false) '
   - make > openssl-make.log
   - make install_sw 
 
@@ -40,7 +40,7 @@ install:
   - mv pcre-8.12 pcre
 
   - cmd: cd pcre
-  - sh -c './configure || cat config.log'  > pcre-configure.log
+  - sh -c './configure > pcre-configure.log || (cat config.log; false)'  
   - make  > pcre-make.log
   - make install
 
