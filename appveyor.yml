@@ -22,18 +22,17 @@ install:
 
   - cmd: cd openssl
   - perl Configure --prefix=/usr/i686-pc-mingw32/ mingw
-  - make
+  - make > nul
   - make install_sw
   - cmd: cd ..
 
   # PCRE
   - appveyor DownloadFile "http://prdownloads.sourceforge.net/pcre/pcre-8.12.tar.bz2?download"
-  - tar xf pcre-8.12.tar.bz2 > nul
+  - tar xf pcre-8.12.tar.bz2
   - mv pcre-8.12 pcre
   - cmd: cd pcre
-  - set CFLAGS=-mno-cygwin
-  - set CXXFLAGS=-mno-cygwin
-  - sh -c 'CFLAGS=-mno-cygwin CXXFLAGS=-mno-cygwin ./configure --prefix=/usr/i686-pc-mingw32 --disable-shared || cat config.log' 
+
+  - sh -c './configure --prefix=/usr/i686-pc-mingw32 --disable-shared || cat config.log' 
   - make 
   - make install
 
