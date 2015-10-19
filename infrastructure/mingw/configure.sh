@@ -37,6 +37,7 @@ if ! ./configure "$@" --host=$target \
 	LDFLAGS="-Wl,-Bstatic -mthreads -L${DEP_PATH}/lib"
 then
 	echo "Error: configure failed, aborting." >&2
+	cat config.log
 	exit 1
 fi
 
