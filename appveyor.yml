@@ -9,13 +9,11 @@ install:
 
   - set PATH=C:\MinGW\msys\1.0\bin;C:\MinGW\bin;%PATH%
   - echo %PATH%
-  # Move up one directory
-  - echo %CD%
-  - cmd: cd ..
-  - echo %CD%
 
 
   # Build Openssl
+  - cmd: cd %APPVEYOR_BUILD_FOLDER%/..
+  - echo %PATH%
   - appveyor DownloadFile "http://www.openssl.org/source/openssl-1.0.2d.tar.gz"
   - tar xf openssl-1.0.2d.tar.gz
   - mv openssl-1.0.2d openssl
@@ -24,9 +22,11 @@ install:
   - perl Configure --prefix=/usr/i686-pc-mingw32/ mingw
   - make > nul
   - make install_sw
-  - cmd: cd ..
+
 
   # PCRE
+  - cmd: cd %APPVEYOR_BUILD_FOLDER%/..
+  - echo %PATH%
   - appveyor DownloadFile "http://prdownloads.sourceforge.net/pcre/pcre-8.12.tar.bz2?download"
   - tar xf pcre-8.12.tar.bz2
   - mv pcre-8.12 pcre
@@ -36,14 +36,14 @@ install:
   - make 
   - make install
 
+
   # Clean up WD
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - echo %CD%
 
 before_build:
-  - cmd: infrastructure/msvc/win32.bat
+  - cmd: sh infrastructure/mingw/configure.sh
 
 
-build:
-  project: ./infrastructure/msvc/2010/boxbackup.sln
-  verbosity: normal
+build_script:
+  - make
