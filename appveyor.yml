@@ -18,7 +18,7 @@ install:
 
   - cmd: cd zlib
   - make -f win32/Makefile.gcc > zlib-make.log
-  - make -f win32/Makefile.gcc install INCLUDE_PATH=/usr/local/include BINARY_PATH=/usr/local/bin LIBRARY_PATH=/usr/local/lib
+  - make -f win32/Makefile.gcc install INCLUDE_PATH=/usr/i686-pc-mingw32/include BINARY_PATH=/usr/i686-pc-mingw32/bin LIBRARY_PATH=/usr/i686-pc-mingw32/lib
 
 
   # Openssl
