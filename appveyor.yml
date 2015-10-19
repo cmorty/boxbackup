@@ -11,6 +11,10 @@ install:
   - echo %PATH%
 
 
+  # mingw
+  - mingw-get install zlib
+  - mingw-get install libz-dev 
+
   # Build Openssl
   - cmd: cd %APPVEYOR_BUILD_FOLDER%/..
   - echo %PATH%
@@ -37,13 +41,13 @@ install:
   - make install
 
 
+
+
   # Clean up WD
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - echo %CD%
 
-before_build:
-  - cmd: sh infrastructure/mingw/configure.sh
-
 
 build_script:
-  - make
+  - sh infrastructure/mingw/configure.sh
+  - sh make
