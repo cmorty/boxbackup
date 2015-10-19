@@ -14,6 +14,7 @@ install:
   # mingw
   - mingw-get install zlib
   - mingw-get install libz-dev 
+  - mingw-get install mingw-zlib-devel
 
   # Build Openssl
   - cmd: cd %APPVEYOR_BUILD_FOLDER%/..
