@@ -43,7 +43,7 @@ install:
   - mv pcre-8.12 pcre
 
   - cmd: cd pcre
-  - sh -c './configure --prefix=/usr/i686-pc-mingw32 --disable-shared || cat config.log'  > pcre-configure.log
+  - sh -c './configure --prefix=/usr/i686-pc-mingw32 --disable-shared > pcre-configure.log || cat config.log' 
   - make  > pcre-make.log
   - make install
 

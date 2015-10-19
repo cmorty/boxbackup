@@ -32,8 +32,7 @@ fi
 
 echo "Running configure"
 if ! ./configure "$@" --host=$target \
-	CFLAGS="-mthreads -I${DEP_PATH}/include" \
-	CXXFLAGS="-mthreads -I${DEP_PATH}/include" \
+	CPPFLAGS="-mthreads -I${DEP_PATH}/include" \
 	LDFLAGS="-Wl,-Bstatic -mthreads -L${DEP_PATH}/lib"
 then
 	echo "Error: configure failed, aborting." >&2
