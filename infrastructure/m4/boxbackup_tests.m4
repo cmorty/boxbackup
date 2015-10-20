@@ -16,27 +16,22 @@ if test "x$GXX" = "xyes"; then
 
   # Don't check for gcc -rdynamic on Solaris as it's broken, but returns 0.
   # On Cygwin it does nothing except cause gcc to emit a warning message.
-  case $build_os in
-  solaris*|cygwin|mingw*)
-    AC_MSG_NOTICE([skipping check for -rdynamic on $build_os])
-    ;;
-  *)
-    # Check whether gcc supports -rdynamic, thanks to Steve Ellcey
-    # [http://readlist.com/lists/gcc.gnu.org/gcc/6/31502.html]
-    # This is needed to get symbols in backtraces.
-    # Note that this apparently fails on HP-UX and Solaris
-    LDFLAGS_BACKUP=$LDFLAGS
-    LDFLAGS="$LDFLAGS -rdynamic"
-    AC_MSG_CHECKING([whether gcc accepts -rdynamic])
-    AC_TRY_LINK([], [return 0;],
-      [AC_MSG_RESULT([yes]); have_rdynamic=yes],
-      [AC_MSG_RESULT([no])])
-    if test x"$have_rdynamic" = x"yes" ; then
-      AC_SUBST([LDADD_RDYNAMIC], ['-rdynamic'])
-    fi
-    LDFLAGS=$LDFLAGS_BACKUP
-    ;;
-  esac
+
+  # Check whether gcc supports -rdynamic, thanks to Steve Ellcey
+  # [http://readlist.com/lists/gcc.gnu.org/gcc/6/31502.html]
+  # This is needed to get symbols in backtraces.
+  # Note that this apparently fails on HP-UX and Solaris
+  LDFLAGS_BACKUP=$LDFLAGS
+  LDFLAGS="$LDFLAGS -rdynamic"
+  AC_MSG_CHECKING([whether gcc accepts -rdynamic])
+  AC_TRY_LINK([], [return 0;],
+    [AC_MSG_RESULT([yes]); have_rdynamic=yes],
+    [AC_MSG_RESULT([no])])
+  if test x"$have_rdynamic" = x"yes" ; then
+    AC_SUBST([LDADD_RDYNAMIC], ['-rdynamic'])
+  fi
+  LDFLAGS=$LDFLAGS_BACKUP
+
 fi
 
 AC_PATH_PROG([PERL], [perl], [AC_MSG_ERROR([[perl executable was not found]])])
