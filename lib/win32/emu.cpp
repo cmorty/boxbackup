@@ -1977,7 +1977,7 @@ time_t ConvertFileTimeToTime_t(FILETIME *fileTime)
 	// timeinfo.tm_yday = ...;
 	timeinfo.tm_year = stUTC.wYear - 1900;
 
-	time_t retVal = _mkgmtime32(&timeinfo);
+	time_t retVal = _mkgmtime(&timeinfo);
 	return retVal;
 }
 
