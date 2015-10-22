@@ -32,10 +32,11 @@ fi
 
 echo "Running configure"
 if ! ./configure -v "$@" \
-	CPPFLAGS="-I${DEP_PATH}/include" \
-	CFLAGS="-mthreads -lmsvcr80" \
-	CXXFLAGS="-mthreads -lmsvcr80" \
-	LDFLAGS="-Wl,-Bstatic -mthreads -L${DEP_PATH}/lib"
+	CPPFLAGS="-I${DEP_PATH}/include " \
+	CFLAGS="-mthreads" \
+	CXXFLAGS="-mthreads" \
+	LDFLAGS="-Wl,-Bstatic -mthreads -L${DEP_PATH}/lib" \
+	LIBS="-lmsvcr80"
 then
 	echo "Error: configure failed, aborting." >&2
 	cat config.log
