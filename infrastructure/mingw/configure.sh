@@ -36,7 +36,8 @@ if ! ./configure -v --build=$host --host=$host "$@" \
 	CFLAGS="-mthreads" \
 	CXXFLAGS="-mthreads" \
 	LDFLAGS="-Wl,-Bstatic -mthreads -L${DEP_PATH}/lib" \
-	LIBS="-lmsvcr80"
+# msvcrt needs a manifest :(
+#	LIBS="-lmsvcr80"
 then
 	echo "Error: configure failed, aborting." >&2
 	cat config.log
