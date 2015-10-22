@@ -31,7 +31,7 @@ if [ ! -x "configure" ]; then
 fi
 
 echo "Running configure"
-if ! ./configure "$@" --host=$target \
+if ! ./configure "$@" \
 	CPPFLAGS="-I${DEP_PATH}/include -lmsvcr80" \
 	CFLAGS="-mthreads" \
 	CXXFLAGS="-mthreads" \
