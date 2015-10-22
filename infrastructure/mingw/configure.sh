@@ -31,10 +31,10 @@ if [ ! -x "configure" ]; then
 fi
 
 echo "Running configure"
-if ! ./configure "$@" \
-	CPPFLAGS="-I${DEP_PATH}/include -lmsvcr80" \
-	CFLAGS="-mthreads" \
-	CXXFLAGS="-mthreads" \
+if ! ./configure -v "$@" \
+	CPPFLAGS="-I${DEP_PATH}/include" \
+	CFLAGS="-mthreads -lmsvcr80" \
+	CXXFLAGS="-mthreads -lmsvcr80" \
 	LDFLAGS="-Wl,-Bstatic -mthreads -L${DEP_PATH}/lib"
 then
 	echo "Error: configure failed, aborting." >&2
