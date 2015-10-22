@@ -31,7 +31,7 @@ if [ ! -x "configure" ]; then
 fi
 
 echo "Running configure"
-if ! ./configure -v "$@" \
+if ! ./configure -v --build=$host --host=$host "$@" \
 	CPPFLAGS="-I${DEP_PATH}/include " \
 	CFLAGS="-mthreads" \
 	CXXFLAGS="-mthreads" \
