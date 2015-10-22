@@ -32,7 +32,7 @@ fi
 
 echo "Running configure"
 if ! ./configure "$@" --host=$target \
-	CPPFLAGS="-I${DEP_PATH}/include" \
+	CPPFLAGS="-I${DEP_PATH}/include -lmsvcr80" \
 	CFLAGS="-mthreads" \
 	CXXFLAGS="-mthreads" \
 	LDFLAGS="-Wl,-Bstatic -mthreads -L${DEP_PATH}/lib"
