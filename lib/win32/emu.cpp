@@ -19,6 +19,7 @@
 
 // message resource definitions for syslog()
 #include "messages.h"
+#include "timeutils.h"
 
 DWORD winerrno;
 struct passwd gTempPasswd;
@@ -1977,7 +1978,7 @@ time_t ConvertFileTimeToTime_t(FILETIME *fileTime)
 	// timeinfo.tm_yday = ...;
 	timeinfo.tm_year = stUTC.wYear - 1900;
 
-	time_t retVal = _mkgmtime(&timeinfo);
+	time_t retVal = mkgmtime(&timeinfo);
 	return retVal;
 }
 
