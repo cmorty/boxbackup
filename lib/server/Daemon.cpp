@@ -24,7 +24,7 @@
 #endif
 
 #ifdef WIN32
-	#include <Strsafe.h>
+	#include "Strsafe.h"
 	#include <ws2tcpip.h>
 	#include <process.h>
 #endif
